@@ -16,21 +16,25 @@ void println(String msg){
   tft.println(msg);
 }
 
-// void fillScreen(String msg){
-//   switch (msg){
-//     case "":
-//       tft.fillScreen(TFT_GREEN);
-//     break;
-//     case "":
-//       tft.fillScreen(TFT_YELLOW);
-//     break;
-//     case "":
-//       tft.fillScreen(TFT_RED);
-//     break;
-//     default:
-//       tft.fillScreen(TFT_YELLOW);
-//       }
-// }
+void fillScreen(int value){
+  switch (value){
+    case 15500:
+    case 12500:
+      tft.fillScreen(TFT_YELLOW);
+    break;
+    case 6500:
+    case 7500:
+    case 9500:
+      tft.fillScreen(TFT_RED);
+    break;
+    case 3500:
+    case 5000:
+      tft.fillScreen(TFT_GREEN);
+    break;
+    default:
+      tft.fillScreen(TFT_DARKGREY);
+      }
+}
 
 
 void callback(char* topic, byte* payload, unsigned int length) {
