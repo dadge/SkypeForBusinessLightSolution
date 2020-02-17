@@ -7,7 +7,7 @@ const char* ssid = "mySSID";
 const char* password =  "myPass";
 const char* mqttServer = "192.168.1.79";
 const int mqttPort = 1883;
-String mqttTopic = "domain/object/topic";
+const char* mqttTopic = "domain/object/topic";
  
 TFT_eSPI tft = TFT_eSPI(135, 240); // Invoke custom library
 
@@ -41,17 +41,13 @@ void callback(char* topic, byte* payload, unsigned int length) {
   Serial.print("Message arrived [");
   Serial.print(topic);
   Serial.print("] ");
-  String msg;
+  String value;
   for (int i=0;i<length;i++) {
 
     Serial.print((char)payload[i]);
-    msg += (char)payload[i];
+    value += (char)payload[i];
   }
-  Serial.println();
-  tft.fillScreen(TFT_YELLOW);
-  tft.setTextColor(TFT_WHITE);
-  tft.setTextDatum(MC_DATUM);
-  tft.drawString(msg,  tft.width() / 2, tft.height() / 2 );
+    fillScreen(value.toInt()); 
 }
 
 
@@ -95,7 +91,7 @@ void setup() {
  
     }
   }
-  client.subscribe("stat/thermometre_salon/temperature");
+  client.subscribe(mqttTopic);
 }
  
 void loop() {
